@@ -3,6 +3,7 @@ package hello.advanced.trace.logtrace;
 import hello.advanced.trace.TraceId;
 import hello.advanced.trace.TraceStatus;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 
 import static java.util.Objects.isNull;
 
@@ -20,7 +21,7 @@ public class ThreadLocalLogTrace implements LogTrace {
 
     private static final String EX_PREFIX = "<X-";
 
-    private ThreadLocal<TraceId> traceIdHolder; // traceId 동기화, 동시성 이슈 발생
+    private ThreadLocal<TraceId> traceIdHolder = new ThreadLocal<>(); // traceId 동기화, 동시성 이슈 발생
 
     @Override
     public TraceStatus begin(String message) {
